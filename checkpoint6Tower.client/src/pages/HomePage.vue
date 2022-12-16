@@ -65,12 +65,12 @@ watchEffect(() => {
       </div>
     </div>
     <div class="optionsSelect">
-      <button @click="AppState.currentFilter = 'all'">All</button>
-      <button @click="AppState.currentFilter = 'concert'">Concerts</button>
-      <button @click="AppState.currentFilter = 'convention'">Conventions</button>
-      <button @click="AppState.currentFilter = 'sport'">Sports</button>
-      <button @click="AppState.currentFilter = 'digital'">Digital</button>
-      <select @change="changeSort" v-model="sort">
+      <button @click="AppState.currentFilter = 'all'" title="filter by all">All</button>
+      <button @click="AppState.currentFilter = 'concert'" title="filter only concerts">Concerts</button>
+      <button @click="AppState.currentFilter = 'convention'" title="filter only conventioms">Conventions</button>
+      <button @click="AppState.currentFilter = 'sport'" title="filter only sports">Sports</button>
+      <button @click="AppState.currentFilter = 'digital'" title="filter only digital">Digital</button>
+      <select @change="changeSort" v-model="sort" title="sort by" name="filterBy">
         <option value="date">Event Date</option>
         <option value="capacity">Capacity</option>
         <option value="newest">Latest Events</option>

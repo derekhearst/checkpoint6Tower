@@ -32,7 +32,7 @@ async function cancelTicket() {
 			<h4>{{ props.ticket.event.name }}</h4>
 			<p>{{ props.ticket.event.location }}</p>
 			<p>{{ new Date(props.ticket.event.startDate).toLocaleDateString() }}</p>
-			<button class="cancelButton" @click="cancelTicket">
+			<button class="cancelButton" @click="cancelTicket" title="cancel your ticket">
 				not going
 			</button>
 		</div>

@@ -1,11 +1,11 @@
 <template>
   <div class="loginMenu">
     <div class="loginItems" v-if="!user.isAuthenticated">
-      <button class="btn btn-primary" @click="login">
+      <button class="btn btn-primary" @click="login" title="Login Page">
         Login
       </button>
       <RouterLink to="/">
-        <button class="btn">
+        <button class="btn" title="Home Page">
           Home
         </button>
       </RouterLink>
@@ -16,19 +16,19 @@
       </div>
 
       <RouterLink to="/">
-        <button class="btn">
+        <button class="btn" title="Home Page">
           Home
         </button>
       </RouterLink>
       <RouterLink to="/Account">
-        <button class="btn">
+        <button class="btn" title="Account Page">
           Account
         </button>
       </RouterLink>
-      <button class="btn btn-success text-white" @click="modalHidden = false">
+      <button class="btn btn-success text-white" @click="modalHidden = false" title="New Event">
         New Event
       </button>
-      <button class="btn btn-outline-info" @click="logout">
+      <button class="btn btn-outline-info" @click="logout" title="Logout">
         Logout
       </button>
     </div>
@@ -38,36 +38,36 @@
     <form @click.stop="">
       <div class="d-flex justify-content-between align-items-center">
         <h3 class="m-0">Create Event</h3>
-        <button class="closeButton" @click.prevent="modalHidden = true">X</button>
+        <button class="closeButton" @click.prevent="modalHidden = true" title="close modal">X</button>
       </div>
 
       <fieldset>
-        <label>Name</label>
-        <input name="name" required v-model="newEvent.name" />
+        <label for="name">Name</label>
+        <input name="name" id="name" required v-model="newEvent.name" />
       </fieldset>
       <fieldset>
-        <label>Description</label>
-        <textarea name="description" rows="3" required v-model="newEvent.description"></textarea>
+        <label for="description">Description</label>
+        <textarea name="description" id="description" rows="3" required v-model="newEvent.description"></textarea>
       </fieldset>
       <fieldset>
-        <label>Cover Image</label>
-        <input name="coverImg" type="url" required v-model="newEvent.coverImg" />
+        <label for="coverImg">Cover Image</label>
+        <input name="coverImg" id="coverImg" type="url" required v-model="newEvent.coverImg" />
       </fieldset>
       <fieldset>
-        <label>Location</label>
-        <input name="location" required v-model="newEvent.location" />
+        <label for="location">Location</label>
+        <input name="location" id="location" required v-model="newEvent.location" />
       </fieldset>
       <fieldset>
-        <label>Start Date</label>
-        <input name="startDate" type="datetime-local" required v-model="newEvent.startDate" />
+        <label for="startDate">Start Date</label>
+        <input name="startDate" id="startDate" type="datetime-local" required v-model="newEvent.startDate" />
       </fieldset>
       <fieldset>
-        <label>Capacity</label>
-        <input name="capacity" type="number" required v-model="newEvent.capacity" />
+        <label for="capacity">Capacity</label>
+        <input name="capacity" id="capacity" type="number" required v-model="newEvent.capacity" />
       </fieldset>
       <fieldset>
-        <label>Type</label>
-        <select v-model="newEvent.type" required>
+        <label for="type">Type</label>
+        <select name="type" id="type" v-model="newEvent.type" required>
           <option value="concert">Concert</option>
           <option value="convention">Convention</option>
           <option value="sport">Sport</option>
@@ -76,8 +76,9 @@
       </fieldset>
 
       <div class="d-flex justify-content-end gap-2 mt-3 ">
-        <button class="btn btn-danger" type="button" @click.prevent="modalHidden = true">Cancel</button>
-        <button class="btn btn-primary" @click.prevent="createEvent">Create</button>
+        <button class="btn btn-danger" type="button" @click.prevent="modalHidden = true"
+          title="cancel event creation">Cancel</button>
+        <button class="btn btn-primary" @click.prevent="createEvent" title="create new event">Create</button>
       </div>
     </form>
   </div>
@@ -133,6 +134,10 @@ let newEvent = ref({
 </script>
 
 <style lang="scss" scoped>
+.btn {
+  color: white;
+}
+
 .loginMenu {
   display: flex;
   color: rgba(204, 243, 253, 1);

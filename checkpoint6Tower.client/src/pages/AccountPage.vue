@@ -1,12 +1,13 @@
 <template>
   <div class="accountPage">
     <div class="myEvents">
-      <div class="d-flex gap-2 align-items-center clickable" @click="eventsCollapsed = !eventsCollapsed">
+      <div class="d-flex gap-2 align-items-center clickable" @click="eventsCollapsed = !eventsCollapsed"
+        title="minimize or maximize your events">
         <h3>My Events</h3>
-        <button v-if="!eventsCollapsed" class="collapseButton">
+        <button v-if="!eventsCollapsed" class="collapseButton" title="collapse your events">
           <i class="mdi mdi-unfold-less-horizontal fs-2"></i>
         </button>
-        <button v-else class="collapseButton">
+        <button v-else class="collapseButton" tile="uncollapse your events">
           <i class="mdi mdi-unfold-more-horizontal fs-2"></i>
         </button>
       </div>
@@ -15,12 +16,13 @@
       </div>
     </div>
     <div class="myTickets">
-      <div class="d-flex gap-2 align-items-center clickable" @click="ticketsCollapsed = !ticketsCollapsed">
+      <div class="d-flex gap-2 align-items-center clickable" @click="ticketsCollapsed = !ticketsCollapsed"
+        title="minimize or maximize your tickets">
         <h3>My Tickets</h3>
-        <button v-if="!ticketsCollapsed" class="collapseButton">
+        <button v-if="!ticketsCollapsed" class="collapseButton" title="collapse your tickets">
           <i class="mdi mdi-unfold-less-horizontal fs-2"></i>
         </button>
-        <button v-else class="collapseButton">
+        <button v-else class="collapseButton" title="uncollapse your tickets">
           <i class="mdi mdi-unfold-more-horizontal fs-2"></i>
         </button>
       </div>

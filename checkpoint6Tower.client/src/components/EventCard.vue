@@ -39,6 +39,7 @@ function navigateToEvent() {
 	width: 100%;
 	height: 100%;
 	z-index: 0;
+	object-fit: cover;
 }
 
 .eventCard {
@@ -57,6 +58,7 @@ function navigateToEvent() {
 		left: 0;
 		width: 100%;
 		height: 100%;
+		object-fit: cover;
 	}
 
 

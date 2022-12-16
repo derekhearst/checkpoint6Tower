@@ -142,9 +142,9 @@ async function leaveEvent() {
 			<div class="fancyBlur">
 				<img src="https://www.onlygfx.com/wp-content/uploads/2017/12/cancelled-stamp-1.png" v-if="event.isCanceled"
 					class="canceled" />
-				<img src="https://www.freeiconspng.com/thumbs/sold-out-png/sold-out-png-31.png" v-if="!event.capacity"
+				<img src="https://www.freeiconspng.com/thumbs/sold-out-png/sold-out-png-31.png" v-else-if="!event.capacity"
 					class="canceled" />
-				<img :src="event.coverImg" class="coverImg" />
+				<img :src="event.coverImg" class="coverImg" name="cover image" alt="coverImage" />
 				<div class="eventDetails">
 					<div class="eventHeader">
 						<div>{{ event.name }}</div>
@@ -152,6 +152,7 @@ async function leaveEvent() {
 					</div>
 					<div class="eventSubHeader">
 						<div>{{ event.location }}</div>
+						<div>{{ event.type }}</div>
 						<div>{{ new Date(event.startDate).toLocaleTimeString() }}</div>
 					</div>
 					<div class="eventDesc">
@@ -161,13 +162,13 @@ async function leaveEvent() {
 						<div class="eventCapacity">{{ event.capacity }} <span>spots left</span></div>
 						<div class="d-flex gap-2" v-if="AppState.account.id">
 							<button v-if="myEvent && !event.isCanceled" class="btn editButton btn-success"
-								@click="modalHidden = false">
+								@click="modalHidden = false" title="edit your event">
 								<i class="mdi mdi-pencil"></i>
 							</button>
 							<button v-if="!attending && !event.isCanceled && event.capacity" @click="joinEvent"
-								class="btn btn-primary">Attend</button>
-							<button v-else-if="!event.isCanceled && attending" @click="leaveEvent"
-								class="btn btn-warning">Unattend</button>
+								class="btn btn-primary" title="attend this event">Attend</button>
+							<button v-else-if="!event.isCanceled && attending" @click="leaveEvent" class="btn btn-warning"
+								title="leave this event">Unattend</button>
 							<button v-else class="btn btn-danger" disabled>Sold out</button>
 						</div>
 					</div>
@@ -192,8 +193,9 @@ async function leaveEvent() {
 			<label v-else>Nobody has said anything yet!</label>
 			<div class="commentBackground" v-if="event.comments?.length || AppState.account.id">
 				<form @submit.prevent="createComment" v-if="AppState.account.id">
-					<textarea name="body" rows="3"></textarea>
-					<button class="btn btn-primary">Post Comment</button>
+					<label for="body">Make a Comment</label>
+					<textarea id="body" name="body" rows="3"></textarea>
+					<button class="btn btn-primary" title="post a comment">Post Comment</button>
 				</form>
 				<div class="commentList">
 					<CommentCard v-for="comment in event.comments" :key="comment.id" :comment="comment" />
@@ -206,37 +208,37 @@ async function leaveEvent() {
 		<form @click.stop="">
 			<div class="d-flex justify-content-between align-items-center">
 				<h3 class="m-0">Edit Event</h3>
-				<button class="closeButton" @click.prevent="modalHidden = true">X</button>
+				<button class="closeButton" @click.prevent="modalHidden = true" title="stop editing this event">X</button>
 			</div>
 
 
 			<fieldset>
-				<label>Name</label>
-				<input name="name" required v-model="editEvent.name" />
+				<label for="editName">Name</label>
+				<input name="name" id="editName" required v-model="editEvent.name" />
 			</fieldset>
 			<fieldset>
-				<label>Description</label>
-				<textarea name="description" rows="3" required v-model="editEvent.description"></textarea>
+				<label for="edescription">Description</label>
+				<textarea name="description" id="edescription" rows="3" required v-model="editEvent.description"></textarea>
 			</fieldset>
 			<fieldset>
-				<label>Cover Image</label>
-				<input name="coverImg" type="url" required v-model="editEvent.coverImg" />
+				<label for="ecoverImg">Cover Image</label>
+				<input name="coverImg" id="ecoverImg" type="url" required v-model="editEvent.coverImg" />
 			</fieldset>
 			<fieldset>
-				<label>Location</label>
-				<input name="location" required v-model="editEvent.location" />
+				<label for="elocation">Location</label>
+				<input name="location" id="elocation" required v-model="editEvent.location" />
 			</fieldset>
 			<fieldset>
-				<label>Start Date</label>
-				<input name="startDate" type="datetime-local" required v-model="editEvent.startDate" />
+				<label for="estartDate">Start Date</label>
+				<input name="startDate" id="estartDate" type="datetime-local" required v-model="editEvent.startDate" />
 			</fieldset>
 			<fieldset>
-				<label>Capacity</label>
-				<input name="capacity" type="number" required v-model="editEvent.capacity" />
+				<label for="ecapacity">Capacity</label>
+				<input name="capacity" id="ecapacity" type="number" required v-model="editEvent.capacity" />
 			</fieldset>
 			<fieldset>
-				<label>Type</label>
-				<select v-model="editEvent.type" required>
+				<label for="etype">Type</label>
+				<select id="etype" v-model="editEvent.type" required>
 					<option value="concert">Concert</option>
 					<option value="convention">Convention</option>
 					<option value="sport">Sport</option>
@@ -246,10 +248,12 @@ async function leaveEvent() {
 
 
 			<div class="d-flex justify-content-between mt-3 ">
-				<button class="btn btn-danger" type="button" @click="cancelEvent">Cancel Event</button>
+				<button class="btn btn-danger" type="button" @click="cancelEvent" title="cancel your event">Cancel
+					Event</button>
 				<div class="justify-content-end gap-2 d-flex">
-					<button class="btn btn-warning" type="button" @click="modalHidden = true">Cancel</button>
-					<button class="btn btn-primary" @click.prevent="saveChanges">Save</button>
+					<button class="btn btn-warning" type="button" @click="modalHidden = true"
+						title="cancel your edits">Cancel</button>
+					<button class="btn btn-primary" @click.prevent="saveChanges" title="save your changes">Save</button>
 				</div>
 			</div>
 
@@ -284,6 +288,7 @@ async function leaveEvent() {
 		width: 100%;
 		height: 100%;
 		pointer-events: none;
+		object-fit: cover;
 
 	}
 
