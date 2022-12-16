@@ -31,7 +31,8 @@ class EventsService {
     // stop them from editing the event
     body.isCanceled = false;
     await event.updateOne(body);
-    return await event.populate("creator");
+
+    return await dbContext.TowerEvents.findById(id).populate("creator");
   }
   async delete(id, userId) {
     let event = await dbContext.TowerEvents.findById(id);
@@ -72,6 +73,10 @@ class EventsService {
     }
     event.capacity += 1;
     await event.save();
+  }
+
+  async getUserEvents(id) {
+    return await dbContext.TowerEvents.find({ creatorId: id });
   }
 }
 

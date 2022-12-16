@@ -1,40 +1,43 @@
 <template>
-  <header>
-    <Navbar />
-  </header>
   <main>
-    <router-view />
+    <div class="body">
+      <Navbar />
+      <router-view />
+    </div>
+    <Login />
   </main>
-   <footer class="bg-dark text-light">
-    Made with 💖 by CodeWorks
-  </footer>
 </template>
 
-<script>
+<script setup>
 import { computed } from 'vue'
 import { AppState } from './AppState'
+import Login from './components/Login.vue'
 import Navbar from './components/Navbar.vue'
 
-export default {
-  setup() {
-    return {
-      appState: computed(() => AppState)
-    }
-  },
-  components: { Navbar }
-}
+
 </script>
 <style lang="scss">
 @import "./assets/scss/main.scss";
+</style>
 
-:root{
-  --main-height: calc(100vh - 32px - 64px);
+<style scoped>
+main {
+  display: flex;
+  width: 100%;
+  background-color: inherit;
+  color: inherit;
+  min-height: 100vh;
+  position: relative;
 }
 
-
-footer {
-  display: grid;
-  place-content: center;
-  height: 32px;
+.body {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex-grow: 1;
+  background-color: inherit;
+  color: inherit;
+  padding: 1rem;
+  gap: 1rem;
 }
 </style>
