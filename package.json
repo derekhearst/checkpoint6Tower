@@ -1,16 +1,14 @@
-
-  {
-    "name": "checkpoint6tower",
-    "version": "1.0.0",
-    "scripts": {
-      "build": "npm run setup:server",
-      "setup:app": "npm run setup:server && npm run setup:client",
-      "setup:client": "cd checkpoint6Tower.client && npm i",
-      "setup:server": "cd checkpoint6Tower && npm i",
-      "start": "node checkpoint6Tower/index.js"
-    },
-    "engines": {
-      "node": "^14.17.0"
-    }
-  }
-  
+{
+	"name": "checkpoint6tower",
+	"version": "1.0.0",
+	"scripts": {
+		"build": "npm run setup:server",
+		"setup:app": "npm run setup:server -f && npm run setup:client -f",
+		"setup:client": "cd checkpoint6Tower.client && npm i",
+		"setup:server": "cd checkpoint6Tower && npm i",
+		"start": "node checkpoint6Tower/index.js"
+	},
+	"engines": {
+		"node": "^14.17.0"
+	}
+}
